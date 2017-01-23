@@ -15,7 +15,7 @@ Steps
 
 1. Change directory \( cd \) into target folder location
 
-2. Run this command to create a folder named GParsGroovyTests and copy down all the pieces :
+2. Run this command to create a folder and copy down all the pieces :
 
    [git clone https://github.com/jnorthr/FileWalker.git](git clone https://github.com/jnorthr/FileWalker.git)
 
