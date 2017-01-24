@@ -1,13 +1,13 @@
 //@Grab('log4j:log4j:1.2.17')  use this when running outside gradle or groovyConsole
+package net.jnorthr.support;
 
-package org.jnorthr.wow;
 // groovy code to choose one image file using our Chooser feature
 // **************************************************************
 import java.io.File;
 import java.io.IOException;
 import org.apache.log4j.*
 import groovy.util.logging.*  
-import org.jnorthr.wow.Response;
+import net.jnorthr.support.Response;
 
 /**
 * The Saver program implements a support application that

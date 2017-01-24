@@ -1,4 +1,5 @@
 //@Grab('log4j:log4j:1.2.17')  use this when running outside gradle or groovyConsole
+package net.jnorthr.support;
 
 /* select multi files ? see: http://stackoverflow.com/questions/11922152/jfilechooser-to-open-multiple-txt-files
 JFileChooser chooser = new JFileChooser();
@@ -8,7 +9,6 @@ File[] files = chooser.getSelectedFiles();
 if(files.length >= 2) 
 */
 
-package org.jnorthr.wow;
 // groovy code to choose one image file using our Chooser feature
 // **************************************************************
 import java.io.File;

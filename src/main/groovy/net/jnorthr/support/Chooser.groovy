@@ -1,6 +1,6 @@
 //@Grab('log4j:log4j:1.2.17')  use this when running outside gradle or groovyConsole
 
-package org.jnorthr.wow;
+package net.jnorthr.support;
 // groovy sample to choose one file using java's  JFileChooser
 // would only allow choice of a single directory by setting another JFileChooser feature
 // http://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
@@ -56,13 +56,13 @@ public class Chooser
 
     /**
      * A path value to influence the JFileChooser as where to allow the user to initially pick a local file artifact.
-     * Can be over-written by a value chosen in the previous run of this module. See 'rememberpath' below
+     * Can be over-written by a value chosen in the previous run of this module. See 'configPath' below
      */
     def initialPath = System.getProperty("user.dir");
 
     /**
      * A path value to influence the JFileChooser as where to allow the user to initially pick a local file artifact.
-     * Can be over-written by a value chosen in the previous run of this module. See 'rememberpath' below
+     * Can be over-written by a value chosen in the previous run of this module. See 'configPath' below
      */
 	def initialFile = "fileToSave.txt";
 
@@ -90,14 +90,14 @@ public class Chooser
      * Temp work area holding a default file path and file name. This name points to a cache where the selected 
      * path from a prior run is stored.  
      */
-    String rememberpath = System.getProperty("user.home") + File.separator  +".path.txt";
+    String configPath = System.getProperty("user.home") + File.separator  +".path.txt";
 
 
     /**
      * Temp work area holding a default file path and file name. This name points to a cache where the selected 
      * full filename from a prior run is stored.  
      */
-    String rememberfile = System.getProperty("user.home") + File.separator  +".file.txt";
+    String configFile = System.getProperty("user.home") + File.separator  +".file.txt";
 
 
     /**
@@ -176,18 +176,18 @@ public class Chooser
     */
     public void setup()
     {
-        boolean present = new File(rememberpath).exists()
+        boolean present = new File(configPath).exists()
         if (present) 
         { 
-        	initialPath = new File(rememberpath).getText(); 
+        	initialPath = new File(configPath).getText(); 
         	re.path = initialPath; 
         	re.fullname = re.path;
         } // end of if
         
-        present = new File(rememberfile).exists()
+        present = new File(configFile).exists()
         if (present) 
         { 
-        	initialFile = new File(rememberfile).getText(); 
+        	initialFile = new File(configFile).getText(); 
         	re.artifact = initialFile; 
         	if (initialFile.size() > 0)
         	{
@@ -284,12 +284,12 @@ public class Chooser
                   re.path = (re.isDir) ? re.fullname : fc.getCurrentDirectory().getAbsolutePath();
                   re.artifact = (re.isDir) ? "" : file.name; 
 
-                  log.info "APPROVE path="+re.path+" artifact="+re.artifact+" fullname="+re.fullname+" rememberpath="+rememberpath+" isDir="+re.isDir;
+                  log.info "APPROVE path="+re.path+" artifact="+re.artifact+" fullname="+re.fullname+" configPath="+configPath+" isDir="+re.isDir;
                   
                   // keep path and filename for next time
-                  def fo = new File(rememberpath)
+                  def fo = new File(configPath)
                   fo.text = (re.isDir) ? re.fullname : re.path;
-				  fo = new File(rememberfile)
+				  fo = new File(configFile)
                   fo.text = (re.isDir) ? "" : re.artifact;
                    
                   re.chosen = true;
@@ -307,7 +307,8 @@ public class Chooser
                   log.info "user action caused error";
                   break;
         } // end of switch
-        println "Chooser getChoice Response="+re.toString();
+        
+        println "Chooser getChoice Response=\n"+re.toString();
         return re;
     } // end of pick
 
@@ -364,7 +365,8 @@ public class Chooser
 		 * need to test the feature to allow user to choose a filename to saveAs
 		 */    
         def ch = new Chooser();
-        ch.say "trying a SAVE feature"
+		ch.say "------------------------"
+        ch.say "Try a SAVE feature"
         ch.saveAs("mark.html");
         ch.setOpenOrSave(false);
         ch.setTitle("Pick a Folder and Filename to save");
@@ -373,28 +375,27 @@ public class Chooser
         if (re.chosen)
         {
         	ch.say "path="+re.path+"\nartifact name="+re.artifact;    
-            ch.say "the full name of the selected file is "+re.fullname;
+            ch.say "the full name of the output file is "+re.fullname;
             ch.say "isDir ? = "+re.isDir;    
         }
         else
         {
             ch.say "no choice was made so output path is "+re.path+" and name="+re.fullname;
 		}
-       System.exit(0);
 
 
 		// ---------------------------------------------------------------------
 		/*
 		 * need to test the default to allow user to choose a folder OR a file
 		 */
-		ch.say "------------------------\n"
+		ch.say "\n------------------------"
         ch = new Chooser();
-        ch.say "trying the default feature"
+        ch.say "Try the default feature"
         re = ch.getChoice(); 
         if (re.chosen)
         {
         	ch.say "path="+re.path+"\nartifact name="+re.artifact;    
-            ch.say "the full name of the selected file is "+re.fullname;
+            ch.say "the full name of the selected artifact is "+re.fullname;
             ch.say "isDir ? = "+re.isDir;    
         }
         else
@@ -409,20 +410,21 @@ public class Chooser
 		/*
 		 * need to test selecting folders only
 		 */
+		ch.say "------------------------"
         ch = new Chooser();
-        ch.say "trying to pick a folder-only feature"
+        ch.say "Pick a folder-only test"
         ch.setTitle("Pick input Folder");
         ch.selectFolderOnly();
     	re = ch.getChoice(); 
         if (re.chosen)
         {
             ch.say "path="+re.path+"\nfile name="+re.artifact;    
-            ch.say "the full name of the selected file is "+re.fullname;    
+            ch.say "the full name of the selected folder is "+re.fullname;    
             ch.say "isDir ? = "+re.isDir;    
         }
         else
         {
-            ch.say "no choice was made so output path is "+re.path+" and name="+re.fullname;
+            ch.say "no choice was made so folder will be "+re.path+" and name="+re.fullname;
 		}
 		ch.say "------------------------\n"
 
@@ -431,6 +433,7 @@ public class Chooser
 		/*
 		 * need to test get image only files like .jpg using Filter class
 		 */
+		ch.say "------------------------"
         ch = new Chooser();
         ch.say "trying to pick a file-only image as png, jpg, gif"
         ch.setTitle("Pick input image");
@@ -440,12 +443,12 @@ public class Chooser
         if (re.chosen)
         {
             ch.say "path="+re.path+"\nfile name="+re.artifact;    
-            ch.say "the full name of the selected file is "+re.fullname;    
+            ch.say "the full name of the selected image is "+re.fullname;    
             ch.say "isDir ? = "+re.isDir;   
         }
         else
         {
-            ch.say "no choice was made so output path is "+re.path+" and name="+re.fullname;
+            ch.say "no choice was made so image file is "+re.path+" and name="+re.fullname;
 		}
 		ch.say "------------------------\n"
 

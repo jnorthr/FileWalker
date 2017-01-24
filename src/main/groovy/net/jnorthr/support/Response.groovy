@@ -1,4 +1,4 @@
-package org.jnorthr.wow;
+package net.jnorthr.support;
 import org.apache.log4j.*
 import groovy.util.logging.*  
 
@@ -86,6 +86,7 @@ isDir=${isDir}
     {
         def obj = new Response();
         println "Response object=\n"+obj.toString();
+        println "--- Response end ---\n";
 	} // end of main
 	
 } // end of class 
