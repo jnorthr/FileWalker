@@ -1,5 +1,6 @@
 package net.jnorthr.support;
 import java.io.*
+import javax.swing.JOptionPane;
 
 // groovy code to choose one folder using our Chooser feature
 // **************************************************************
@@ -65,6 +66,8 @@ public class Walker
      */
 	Chooser ch;
 	
+	Object[] options = ["Reuse Path", "Choose Path"];	
+   
    // =========================================================================
    /** 
     * Class constructor.
@@ -73,6 +76,16 @@ public class Walker
     */
 	public Walker()
 	{
+		int n = JOptionPane.showOptionDialog(null,
+    		"Would you like to re-use the same path as before ?",
+	    	"Use Prior Path", // frame title
+		    JOptionPane.YES_NO_OPTION,
+    		JOptionPane.QUESTION_MESSAGE,
+    		null,     //do not use a custom Icon
+    		options,  //the titles of buttons
+    		options[0]); //default button title
+    	if (n==JOptionPane.NO_OPTION) {say "NO ="+n;}
+    	
         ch = new Chooser();
         ch.selectFolderOnly();
         Response re = ch.getChoice();

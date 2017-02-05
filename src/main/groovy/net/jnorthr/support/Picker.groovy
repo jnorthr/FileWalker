@@ -9,7 +9,8 @@ File[] files = chooser.getSelectedFiles();
 if(files.length >= 2) 
 */
 
-// groovy code to choose one image file using our Chooser feature
+// **************************************************************
+// Groovy code to choose one image file using our Chooser feature
 // **************************************************************
 import java.io.File;
 import java.io.IOException;
