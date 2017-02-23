@@ -249,8 +249,8 @@ public class Chooser
     */
     public allowImagesOnly()
     {
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG, JPG & GIF Images", "png", "jpg", "gif");
-	    fc.setFileFilter(filter);
+	FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG, JPG, SVG & GIF Images", "png", "jpg", "gif", "svg");
+	fc.setFileFilter(filter);
     } // endof setPath
 
 
@@ -277,6 +277,7 @@ public class Chooser
             case JFileChooser.APPROVE_OPTION:
                   File file = fc.getSelectedFile();
 				  re.returncode = JFileChooser.APPROVE_OPTION;
+				  re.found = file.exists();
 				  // was this a directory folder ?
                   re.isDir = new File(file.toString()).isDirectory();
 
@@ -286,7 +287,7 @@ public class Chooser
 
                   log.info "APPROVE path="+re.path+" artifact="+re.artifact+" fullname="+re.fullname+" configPath="+configPath+" isDir="+re.isDir;
                   
-                  // keep path and filename for next time
+                  // keep path and filename for next time in our external ~/.path.txt file
                   def fo = new File(configPath)
                   fo.text = (re.isDir) ? re.fullname : re.path;
 				  fo = new File(configFile)
@@ -298,11 +299,13 @@ public class Chooser
             case JFileChooser.CANCEL_OPTION:
 				  re.returncode = JFileChooser.CANCEL_OPTION;
                   re.chosen = false;
+                  re.found = false;
                   log.info "user cancelled action";
                   break;
 
             case JFileChooser.ERROR_OPTION:
 				  re.returncode = JFileChooser.ERROR_OPTION;
+                  re.found = false;
                   re.chosen = false;
                   log.info "user action caused error";
                   break;

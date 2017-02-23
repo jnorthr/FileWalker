@@ -22,6 +22,8 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
+    compile fileTree(dir: "$projectDir/src/main/libs", include: ['*.jar'])
+
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile group: 'log4j', name:'log4j', version: '1.2.17'
@@ -53,8 +55,18 @@ dependencies {
 }
 
 mainClassName = "net.jnorthr.support.Walker"
+
 task say << {
 	println "$projectDir=["+projectDir+"]"
+}
+
+
+// runs our main() method; first arg points to a local folder / path name
+task(runner, dependsOn: 'classes', type: JavaExec) {
+	main = 'net.jnorthr.support.Walker'
+	classpath = sourceSets.main.runtimeClasspath
+	args '/Users/jimnorthrop/Dropbox/Projects/FileWalker/src', ~/^.*\.properties$/
+	systemProperty 'simple.message', 'Hi kids '
 }
 
 // runs the Chooser main() method; args are ignored but maybe later ?
@@ -65,7 +77,8 @@ task(runChooser, dependsOn: 'classes', type: JavaExec) {
 	systemProperty 'simple.message', 'Hi kids '
 }
 
-// runs the Picker main() method; args are ignored but maybe later ?
+// runs the Image Picker main() method; args are ignored but maybe later ?
+// only allows choice of .png .gif .jpg image files
 task(runPicker, dependsOn: 'classes', type: JavaExec) {
 	main = 'net.jnorthr.support.Picker'
 	classpath = sourceSets.main.runtimeClasspath

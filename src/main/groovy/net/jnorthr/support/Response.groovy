@@ -57,24 +57,46 @@ public class Response
      * Flag set when name of the user's artifact 
      * selected with the chooser is a folder directory 
      */
-    boolean isDir = true;
+    boolean isDir = false;
 
+    /**
+     * Flag set when name of the user's artifact 
+     * points to an actual file or folder that really does exist 
+     */
+    boolean found = false;
+
+
+    /**
+      * default class constructor
+      */
+    public Response()
+    {
+	log.level = Level.INFO
+    }
+
+    /**
+      * class method to pump out log entries as 'info'
+      */
+    def say()
+    {
+	log.info this.toString();
+    }
 
     /**
       * class toString() method
       */
         String toString() {
-"""chosen=${chosen} 
+"""chosen=${chosen}
 returncode=${returncode}
 path=${path}
 artifact=${artifact} 
-fullname=${fullname} 
-isDir=${isDir}     
-""".toString()
+fullname=${fullname}
+found=${found}
+isDir=${isDir}""".toString()
          } // end of toString()    
          
 
-	// =============================================================================    
+    // =============================================================================    
     /**
      * The primary method to execute this class. Can be used to test and examine logic and performance issues. 
      * 
@@ -85,8 +107,11 @@ isDir=${isDir}
     public static void main(String[] args)
     {
         def obj = new Response();
-        println "Response object=\n"+obj.toString();
+        println "Response object="+obj.toString();
         println "--- Response end ---\n";
+		println "log=\n-------------------------"
+		println obj.say();
+		println "-------------------------"
 	} // end of main
 	
 } // end of class 

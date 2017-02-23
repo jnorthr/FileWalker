@@ -60,7 +60,7 @@ public class Picker
     */
     public Picker()
     {
-    	log.info("this is an .info msg from the Picker default constructor");
+    	log.info("this is an .info msg from the Image Picker default constructor");
         setup();
     } // endof constructor    
     
@@ -78,7 +78,7 @@ public class Picker
     } // endof setup
 
 
-	// =============================================================================
+    // =============================================================================
     /**
      * Returns a Response object to indicate what the user did in the JFileChooser dialog. 
      * 
@@ -96,7 +96,7 @@ public class Picker
 		if (x < 1) { re.chosen = false; }
 		if (getDir()) { re.chosen = false; }
 		return re;
-	} // end of getChoice
+    } // end of getChoice
 
 
     /** 
@@ -154,11 +154,11 @@ public class Picker
      */
     public static void main(String[] args)
     {
-		/*
-		 * need to test get image only files like .jpg using Filter class
-		 */
+	/*
+	 * need to test get image only files like .jpg using Filter class
+	 */
         def ch = new Picker();
-        ch.say "trying to pick a file-only image as png, jpg, gif";
+        ch.say "trying to pick a file-only image as png, jpg, gif, .svg";
         Response re = ch.getChoice();
         if (re.chosen)
         {
@@ -168,7 +168,7 @@ public class Picker
         }
         else
         {
-        	ch.say "no choice was made so output filename is "+re.fullname+" and path="+re.path;
+            ch.say "no choice was made so output filename is "+re.fullname+" and path="+re.path;
             ch.say "artifact name="+re.artifact;    
         }
         
