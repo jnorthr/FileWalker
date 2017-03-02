@@ -1,4 +1,5 @@
-package net.jnorthr.support;
+package io.jnorthr.toolkit;
+
 import java.io.*
 import javax.swing.JOptionPane;
 
@@ -6,7 +7,8 @@ import javax.swing.JOptionPane;
 import java.util.regex.* 
 
 // configuration support utility
-import cloud.jnorthr.tools.configuration.Configurator;
+import io.jnorthr.tools.configuration.Configurator;
+import io.jnorthr.toolkit.Chooser;
 
 // groovy code to choose one folder to walk thru the files found within it
 // **************************************************************
@@ -14,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.log4j.*
 import groovy.util.logging.*  
-import javax.swing.JFileChooser;
+//import javax.swing.JFileChooser;
 
 /**
 * The Walker program implements a support application that allows user to pick a single file or folder directory and then
