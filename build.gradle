@@ -76,9 +76,9 @@ say.doLast{
 
 // runs our main() method; first arg points to a local folder / path name
 task(runner, dependsOn: 'classes', type: JavaExec) {
-	main = 'io.jnorthr.toolkit.Walker'
+	main = 'io.fred.toolkit.Walker'
 	classpath = sourceSets.main.runtimeClasspath
-	args '/Users/jimnorthrop/Dropbox/Projects/FileWalker/src', ~/^.*\.properties$/
+	args '/Users/fred/Dropbox/Projects/FileWalker/src', ~/^.*\.properties$/
 	systemProperty 'simple.message', 'Hi kids '
 }
 
