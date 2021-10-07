@@ -1,6 +1,6 @@
 = FileWalker
-jnorthr <james.northrop@orange>
-v1.0
+jnorthr <james.b.northrop@googlemail.com>
+v2.0
 :icons: font
 
 ''''
@@ -9,11 +9,15 @@ IMPORTANT: Travis Build Status for Master Branch: image:https://img.shields.io/t
 
 ''''
 
+NOTE: Revised to use gradle version 7.1 and later versions of groovy,etc
+
+''''
+
 == Purpose
 
 A Gradle project for Groovy users who need utility code to walk a local directory. Clone includes gradle build tool wrapper and folder structure like maven/gradle so you don't need an installed gradle build tool.
  
-.Pre-requisites
+.Pre-requisite
  . Working internet connection
  . Installed Git client to copy/clone this repo
  . Ability to use terminal console

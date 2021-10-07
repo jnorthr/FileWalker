@@ -2,6 +2,7 @@ package io.jnorthr.toolkit;
 
 import java.io.*
 import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
 
 // stuff for regular expression filtering
 import java.util.regex.* 
@@ -16,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.log4j.*
 import groovy.util.logging.*  
-//import javax.swing.JFileChooser;
 
 /**
 * The Walker program implements a support application that allows user to pick a single file or folder directory and then
@@ -314,6 +314,7 @@ public class Walker
      */
     public static void main(String[] args)
     {
+        println "------------------------\n--- Starting Walker ..."
         Walker ch;
         
         /*
@@ -334,6 +335,8 @@ public class Walker
         ch.run();
         println "\n---------------\n"
         ch.parse();
+        println "------------------------\n--- End of Walker ..."
+
         System.exit(0);
     } // end of main    
     
